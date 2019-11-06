@@ -1,0 +1,93 @@
+{
+  "id": "1461427",
+  "name": "web_App_Project",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon",
+  "description": "Vue移动端项目",
+  "glyphs": [
+    {
+      "icon_id": "624530",
+      "name": "购物车",
+      "font_class": "gouwuche",
+      "unicode": "e63f",
+      "unicode_decimal": 58943
+    },
+    {
+      "icon_id": "624555",
+      "name": "购物车添加",
+      "font_class": "gouwuchetianjia",
+      "unicode": "e640",
+      "unicode_decimal": 58944
+    },
+    {
+      "icon_id": "629333",
+      "name": "设置",
+      "font_class": "shezhi",
+      "unicode": "e64b",
+      "unicode_decimal": 58955
+    },
+    {
+      "icon_id": "629340",
+      "name": "收货地址",
+      "font_class": "shouhuodizhi",
+      "unicode": "e64e",
+      "unicode_decimal": 58958
+    },
+    {
+      "icon_id": "629343",
+      "name": "首页",
+      "font_class": "shouye",
+      "unicode": "e64f",
+      "unicode_decimal": 58959
+    },
+    {
+      "icon_id": "629357",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "e651",
+      "unicode_decimal": 58961
+    },
+    {
+      "icon_id": "629366",
+      "name": "我的订单",
+      "font_class": "wodedingdan",
+      "unicode": "e655",
+      "unicode_decimal": 58965
+    },
+    {
+      "icon_id": "629374",
+      "name": "我的反馈",
+      "font_class": "wodefankui",
+      "unicode": "e656",
+      "unicode_decimal": 58966
+    },
+    {
+      "icon_id": "630095",
+      "name": "向左箭头",
+      "font_class": "xiangzuojiantou",
+      "unicode": "e660",
+      "unicode_decimal": 58976
+    },
+    {
+      "icon_id": "630252",
+      "name": "消息中心",
+      "font_class": "xiaoxizhongxin",
+      "unicode": "e665",
+      "unicode_decimal": 58981
+    },
+    {
+      "icon_id": "8958595",
+      "name": "我 的 (1)",
+      "font_class": "wode1",
+      "unicode": "e612",
+      "unicode_decimal": 58898
+    },
+    {
+      "icon_id": "9521856",
+      "name": "fen_lei",
+      "font_class": "fen_lei",
+      "unicode": "e634",
+      "unicode_decimal": 58932
+    }
+  ]
+}
