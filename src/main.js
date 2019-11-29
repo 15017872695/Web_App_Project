@@ -4,11 +4,15 @@ import router from './router/index'
 import Router from 'vue-router'
 import store from './store/index'
 import 'lib-flexible'
+import 'mand-mobile/lib/mand-mobile.css'
+import 'vant/lib/index.css';
+
 
 import "@/assets/font/iconfont.css";
 
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+
 
 // vue router 报错： Uncaught (in promise) NavigationDuplicated {_name:""NavigationDuplicated"... 的解决方法
 const originalPush = Router.prototype.push
