@@ -13,12 +13,12 @@ const service = axios.create({
         service.interceptors.request.use(
             config => {
                 // 这里可以自定义一些config 配置
-
+                console.log(config)
                 return config;
             },
             error => {
                 //  这里处理一些请求出错的情况
-
+                console.log(error)
                 Promise.reject(error);
             }
         )
