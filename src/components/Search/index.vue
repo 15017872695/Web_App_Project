@@ -14,22 +14,32 @@ export default {
             value:''
         }
     },
+    props:{
+        searchVal:{
+            type: String,
+            default:""
+        }
+        
+    },
     components: {
         [Search.name]: Search
+    },
+    created() {
+        this.value = this.searchVal;
     }
 }
 </script>
 <style lang="scss" scoped>
     #Search{
         width: 100%;
-        height: 6vh;
+        height: auto;
         border-bottom: 1px solid #eee;
         display:flex;
         justify-content: space-around;
         align-items:center;
         padding: 0 2vw;
         box-sizing: border-box;
-        padding:3.5vh 3vw;
+        padding:0 3vw;
         box-sizing: border-box;
         i{
             font-size:8vw;
@@ -37,15 +47,20 @@ export default {
         }
         /deep/ .van-search{
             width: 80vw;
-            height:5vh;
+            height:9vw;
             padding: 0px 12px;
         }
         /deep/ .van-search__content{
             border-radius: 25px;
             height:100%;
+            font-size:6vw;
             /deep/ .van-cell div{
                 display: flex;
                 align-items: center;
+                font-size:3.5vw;
+            }
+            /deep/ .van-icon{
+                font-size:4vw;
             }
         }
     }
