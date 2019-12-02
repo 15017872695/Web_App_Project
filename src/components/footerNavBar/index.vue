@@ -18,6 +18,12 @@
 <script>
 export default {
   name: "footerNavBar",
+  props:{
+    footerPathProps:{
+      type: String,
+      default: "/ShoppingMall"
+    }
+  },
   data() {
     return {
       NavBarData: [
@@ -33,22 +39,28 @@ export default {
           title: "分类",
           icon: "iconfont iconfen_lei"
         },
-        {
-          name: "ShoppingCath",
-          path: "/ShoppingCath",
-          title: "购物车",
-          icon: "iconfont icongouwuche"
-        },
+        { name: "ShoppingCath",path: "/ShoppingCath",title: "购物车",icon: "iconfont icongouwuche"},
         { name: "My", path: "/My", title: "我的", icon: "iconfont iconwode1" }
       ],
-      activeIndex: 0
+      activeIndex: 0,
     };
   },
-  created() {},
+  created() {
+    console.log(this.footerPathProps)
+  },
   methods: {
     goRoute(index, newPath) {
       this.activeIndex = index;
-      this.$router.push({ path: newPath });
+      this.$router.push({ path: newPath }); 
+    },
+  },
+  watch:{
+    footerPathProps(newVal,oldVal) {//使用watch监听属性，监听父组件传递过来的值。newVal新值,oldVal旧值
+      for(let i in this.NavBarData){
+        if(this.NavBarData[i].path==newVal){
+          this.activeIndex = i;
+        }
+      }
     }
   }
 };

@@ -33,7 +33,7 @@ export default {
         {name:'商城',path:'/ShoppingMall'},
         {name:'社区',path:'/Community'},
         {name:'服务',path:'/Serve'},
-        {name:'咨询',path:'/Consult'},
+        {name:'资讯',path:'/Consult'},
         {name:'门店',path:'/Shop'},
       ],
       activeIndex:0

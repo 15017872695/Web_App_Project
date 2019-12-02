@@ -4,12 +4,22 @@ import router from './router/index'
 import Router from 'vue-router'
 import store from './store/index'
 import 'lib-flexible'
+// UI库
 import 'mand-mobile/lib/mand-mobile.css'
 import 'vant/lib/index.css';
+//图片懒加载插件
+import VueLazyload from 'vue-lazyload';
 
-
+// 小图标
 import "@/assets/font/iconfont.css";
 
+Vue.use(VueLazyload)
+Vue.use(VueLazyload, {
+  preLoad: 1.3,
+  error: 'dist/error.png',
+  loading: '/assets/img/imgLodding.jpg',
+  attempt: 1
+})
 
 Vue.config.productionTip = false;
 

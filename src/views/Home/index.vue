@@ -9,7 +9,7 @@
     </keep-alive>
 
     <!-- 首页底部导航条 -->
-    <footer-Nav-Bar></footer-Nav-Bar>
+    <footer-Nav-Bar :footerPathProps="footerPath"></footer-Nav-Bar>
     
     <!-- 首页压屏窗广告栏 -->
     <md-landscape v-model="showPic">
@@ -28,6 +28,7 @@ export default {
   data() {
     return {
       showPic: false,
+      footerPath:''
     }
   },
   // 注册组件
@@ -42,6 +43,12 @@ export default {
   methods:{
     hideShowPic(){
       this.showPic = true
+    },
+  },
+  watch :{
+    // 通过watch 来时刻监听 路由变化
+    '$route'(to, from){
+      this.footerPath = to.fullPath
     }
   }
 };
