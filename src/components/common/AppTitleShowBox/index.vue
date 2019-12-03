@@ -1,10 +1,10 @@
 <template>
   <!-- 首页顶部APP广告栏 -->
-  <div id="AppTitleShowBox">
+  <div id="AppTitleShowBox" v-show="hideBoxBln?BoxHidden:hideBoxBln">
     <div class="HomeAppTitleShowBox">
-      <i class="iconfont iconclose"></i>
+      <i class="iconfont iconclose" @click="hideBox"></i>
       <div class="title">
-        <img src="../../assets/img/logo.svg" alt />
+        <img src="../../../assets/img/logo.svg" alt />
         <div>
           <span>App买电脑首单立减10元</span>
           <span>注册即送188元大礼包，签到送延保！</span>
@@ -14,7 +14,7 @@
     </div>
 
     <div class="HomeAppTitleShowBoxTwo">
-      <img src="../../assets/img/navBarLOGO.png" alt="">
+      <img src="../../../assets/img/navBarLOGO.png" alt="">
       <ul>
         <li v-for="(item,index) in HomeNavBarData" :key="item+index" @click="activeFNC(index,item.path)" >
           <span :class="activeIndex == index ? 'active' :''">{{item.name}}</span>
@@ -27,6 +27,12 @@
 <script>
 export default {
   name: "AppTitleShowBox",
+  props:{
+    BoxHidden:{
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
        HomeNavBarData:[
@@ -36,13 +42,20 @@ export default {
         {name:'资讯',path:'/Consult'},
         {name:'门店',path:'/Shop'},
       ],
-      activeIndex:0
+      activeIndex:0,
+      hideBoxBln:true,
+
     };
   },
   methods: {
     activeFNC(index,path){
       this.activeIndex = index;
       this.$router.push({path})
+    },
+    hideBox(){
+
+      // this.hideBoxBln = false;
+      // this.BoxHidden = false;
     }
   }
 };
@@ -52,6 +65,11 @@ export default {
 #AppTitleShowBox{
   display: flex;
   flex-direction: column;
+  position:fixed;
+  top: 0;
+  background-color:#fff;
+  z-index: 999;
+  width: 100%;
 }
 .HomeAppTitleShowBox {
   width: 100%;

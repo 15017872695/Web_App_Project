@@ -1,5 +1,5 @@
 <template>
-    <div id="Search">
+    <div id="Search" :style="{top:BoxHidden?'27vw':'0'}">
         <i class="iconfont iconmanage"></i>
         <van-search placeholder="请输入搜索关键词" v-model="value" disabled/>
         <i class="iconfont iconmessage"></i>
@@ -18,14 +18,22 @@ export default {
         searchVal:{
             type: String,
             default:""
+        },
+        BoxHidden:{
+            type: Boolean,
+            default: true
         }
-        
     },
     components: {
         [Search.name]: Search
     },
     created() {
         this.value = this.searchVal;
+    },
+    watch:{
+        BoxHidden(newVal,oldVal){
+            
+        }
     }
 }
 </script>
@@ -37,10 +45,12 @@ export default {
         display:flex;
         justify-content: space-around;
         align-items:center;
-        padding: 0 2vw;
-        box-sizing: border-box;
         padding:0 3vw;
         box-sizing: border-box;
+        position: fixed;
+        top: 27vw;
+        z-index:999;
+        background:#fff;
         i{
             font-size:8vw;
             color: #888;

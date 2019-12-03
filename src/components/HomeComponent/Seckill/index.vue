@@ -5,6 +5,8 @@
         <span>限时秒杀</span>
         <span>0点场</span>
         <div>
+          <em>{{day }}</em>
+          <i>:</i>
           <em>{{hour}}</em>
           <i>:</i>
           <em>{{min}}</em>
@@ -56,7 +58,7 @@ export default {
     name:"Seckill",
     data() {
         return {
-            curStartTime: '2019-12-2 12:00:00',
+            curStartTime: '2019-12-5',
             hour: '00',
             min: '00',
             second: '00',
@@ -74,7 +76,6 @@ export default {
         // 设置截止时间
         let endDate = new Date(this.curStartTime) // this.curStartTime需要倒计时的日期
         let end = endDate.getTime()
-        console.log(end,now)
         // 时间差
         let leftTime = end - now
         // 定义变量 d,h,m,s保存倒计时的时间
@@ -111,7 +112,7 @@ export default {
 #Seckill {
   width: 100%;
   height: auto;
-  border-bottom: 4px solid #eee;
+  border-bottom: 2vw solid #eee;
   .Seckill-title {
     width: 100%;
     height: 13vw;
@@ -139,13 +140,16 @@ export default {
       div {
         display: flex;
         em {
-          display: block;
+          width: 5vw;
+          height: 4vw;
           background-color: #f4364c;
           color: #fff;
           border-radius: 1vw;
-          padding: 0 1vw;
           box-sizing: border-box;
           font-size: 2.5vw;
+          display: flex;
+          justify-content: center;
+          align-items: center;
         }
         i {
           color: #f4364c;
@@ -174,7 +178,8 @@ export default {
       // flex-wrap: nowrap;
       padding-left: 1px;
       box-sizing: border-box;
-      margin: 5vw 0vw;
+      margin-bottom: 5vw;
+      overflow-y: hidden;
       li {
         width: 32vw;
         height: 46vw;
@@ -206,6 +211,9 @@ export default {
           text-decoration: line-through;
         }
       }
+    }
+    ul::-webkit-scrollbar{
+      display: none;
     }
   }
 }
