@@ -11,7 +11,7 @@ export default {
     name: "Search",
     data(){
         return{
-            value:''
+            value:this.searchVal
         }
     },
     props:{
@@ -28,11 +28,15 @@ export default {
         [Search.name]: Search
     },
     created() {
-        this.value = this.searchVal;
+        
     },
     watch:{
         BoxHidden(newVal,oldVal){
             
+        },
+        searchVal(newVal,oldVal){
+            console.log(newVal)
+            this.value = newVal;
         }
     }
 }

@@ -1,7 +1,12 @@
 <template>
   <div id="Community">
-      <Search></Search>
-      <van-button type="primary">社区</van-button>
+
+    <Search :searchVal="value"></Search>
+
+    <!-- 轮播图模块 -->
+    <Swiper ></Swiper>
+
+    <van-button type="primary">社区</van-button>
 </div>
   
 </template>
@@ -9,6 +14,7 @@
 <script>
 import { Button } from "vant";
 import Search from '../../../components/common/Search'
+import Swiper from "@/components/common/Swiper";
 export default {
   name: "Community",
   data() {
@@ -17,11 +23,11 @@ export default {
     };
   },
   components: {
-    [Button.name]: Button,
-    Search
+    [Button.name]: Button,Search,Swiper
   }
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
+
 </style>
