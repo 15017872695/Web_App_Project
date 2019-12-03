@@ -1,5 +1,5 @@
 <template>
-  <div id="Swiper">
+  <div id="Swiper" :style="{marginTop:BoxHidden?'39.5vw':'0'}">
     <van-swipe :autoplay="3000" indicator-color="white" lazyComponent="true">
       <van-swipe-item v-for="(image, index) in images" :key="index" v-lazy-container = "{selector:'img',error:'xxx.jpg',loading:'imgLodding.jpg'} ">
         <img v-lazy="image" :data-src="image"/>
@@ -12,6 +12,12 @@ import { Swipe, SwipeItem } from "vant";
 export default {
   name: "Swiper",
   components: { [Swipe.name]: Swipe, [SwipeItem.name]: SwipeItem},
+  props:{
+    BoxHidden:{
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
       images: [
@@ -31,6 +37,7 @@ export default {
 #Swiper {
   width: 100%;
   height: 43vw;
+  margin-top: 39.5vw;
   /deep/ .van-swipe{
       width: 100%;
       height: 100%;

@@ -8,7 +8,7 @@
 
 <script>
 import { Button } from "vant";
-import Search from '@/components/Search'
+import Search from '../../../components/common/Search'
 export default {
   name: "Consult",
   data() {
