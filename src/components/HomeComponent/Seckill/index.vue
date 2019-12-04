@@ -207,7 +207,7 @@ export default {
         }
         span:nth-child(3) {
           color: #808080;
-          font-size: 2vw;
+          font-size: 3vw;
           text-decoration: line-through;
         }
       }

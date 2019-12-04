@@ -17,7 +17,7 @@
       <img src="../../../assets/img/navBarLOGO.png" alt="">
       <ul>
         <li v-for="(item,index) in HomeNavBarData" :key="item+index" @click="activeFNC(index,item.path)" >
-          <span :class="activeIndex == index ? 'active' :''">{{item.name}}</span>
+          <span :class="activeIndex == item.path ? 'active' :''">{{item.name}}</span>
         </li>
       </ul>
     </div>
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import eventBus from '../../../utils/eventBus.js'
 export default {
   name: "AppTitleShowBox",
   props:{
@@ -42,21 +43,31 @@ export default {
         {name:'资讯',path:'/Consult'},
         {name:'门店',path:'/Shop'},
       ],
-      activeIndex:0,
+      activeIndex:'/ShoppingMall',
       hideBoxBln:true,
-
     };
   },
   methods: {
     activeFNC(index,path){
-      this.activeIndex = index;
+      this.activeIndex = path;
       this.$router.push({path})
     },
     hideBox(){
-
-      // this.hideBoxBln = false;
-      // this.BoxHidden = false;
+      
     }
+  },
+  mounted() {
+    this.activeIndex = this.$router.history.current.path
+  },
+  created() {
+    eventBus.$on('my-event',args =>{
+      for(let i in this.HomeNavBarData){
+        if(this.HomeNavBarData[i].path == args){
+          this.activeIndex = args;
+        }
+      }
+      
+    })
   }
 };
 </script>
@@ -103,6 +114,12 @@ export default {
     span:nth-child(1) {
       font-weight: bold;
       font-size: 4vw;
+    }
+    span:nth-child(2){
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      overflow: hidden;
     }
   }
   .Immediately_open {

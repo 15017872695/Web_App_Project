@@ -18,5 +18,12 @@ export default {    //业务中需要进行请求可以用import后，进行传�
             url:'/userinfo',
             metohd:'GET',
         })
+    },
+
+    // 获取周围信息
+    getLocalStion(){
+        return request({
+            url:'http://restapi.amap.com/v3/batch?key=7168593a2164a8afa9599b39d46ba18d'
+        })
     }
 }

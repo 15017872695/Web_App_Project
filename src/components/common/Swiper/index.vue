@@ -36,7 +36,7 @@ export default {
 <style lang="scss" scoped>
 #Swiper {
   width: 100%;
-  height: 43vw;
+  height: 45vw;
   margin-top: 39.5vw;
   /deep/ .van-swipe{
       width: 100%;
