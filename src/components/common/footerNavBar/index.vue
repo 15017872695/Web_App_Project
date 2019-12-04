@@ -5,7 +5,7 @@
       <li
         v-for="(item,index) in NavBarData"
         :key="item+index"
-        :style="activeIndex==index ? 'color:#F93722;' : ''"
+        :style="index==0 ? 'color:#F93722;' : ''"
         @click="goRoute(index,item.path)"
       >
         <i :class="item.icon"></i>
@@ -16,6 +16,7 @@
 </template>
 
 <script>
+import eventBus from '../../../utils/eventBus.js'
 export default {
   name: "footerNavBar",
   props:{
@@ -27,18 +28,7 @@ export default {
   data() {
     return {
       NavBarData: [
-        {
-          name: "Home",
-          path: "/ShoppingMall",
-          title: "首页",
-          icon: "iconfont iconshouye"
-        },
-        {
-          name: "Classify",
-          path: "/Classify",
-          title: "分类",
-          icon: "iconfont iconfen_lei"
-        },
+        { name: "Home",path: "/ShoppingMall",title: "首页",icon: "iconfont iconshouye"},{name: "Classify",path: "/Classify",title: "分类",icon: "iconfont iconfen_lei"},
         { name: "ShoppingCath",path: "/ShoppingCath",title: "购物车",icon: "iconfont icongouwuche"},
         { name: "My", path: "/My", title: "我的", icon: "iconfont iconwode1" }
       ],
@@ -51,9 +41,10 @@ export default {
   methods: {
     goRoute(index, newPath) {
       this.activeIndex = index;
+      eventBus.$emit('my-event',newPath)
       this.$router.push({ path: newPath }); 
     },
-  },
+  }, 
   watch:{
     footerPathProps(newVal,oldVal) {//使用watch监听属性，监听父组件传递过来的值。newVal新值,oldVal旧值
       for(let i in this.NavBarData){

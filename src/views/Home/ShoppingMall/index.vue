@@ -115,6 +115,7 @@ export default {
       font-size: 3vw;
       img {
         width: 60%;
+        height: 10vw;
         margin-bottom: 2vw;
       }
     }
