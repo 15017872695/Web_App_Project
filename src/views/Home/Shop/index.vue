@@ -14,11 +14,13 @@
                     show-action
                     shape="round"
                     @search="onSearch"
+                    @input="onSearch"
                 >
                     <div slot="action" @click="onSearch">搜索</div>
                 </van-search>
             </div>
         </div>
+        <div id="panel" v-show="hidePanel"></div>
     </div>
 </template>
 
@@ -26,6 +28,7 @@
 import axios from 'axios';
 import { Search } from 'vant';
 import MapLoader from '@/assets/AMap/index.js'
+  var placeSearch;
     export default {
         name: "Shop",
         data() {
@@ -36,7 +39,8 @@ import MapLoader from '@/assets/AMap/index.js'
                     lng: '',
                     lat: ''
                 },
-                value:''
+                value:'',
+                hidePanel:false
             }
         },
         components: {[Search.name]:Search},
@@ -80,7 +84,7 @@ import MapLoader from '@/assets/AMap/index.js'
                         viewMode: '3D',  //设置地图模式
                         // lang:'en',  //设置地图文字为英文
                     })
-                    AMap.plugin(['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PlaceSearch', 'AMap.Geolocation'], function () {
+                    AMap.plugin(['AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PlaceSearch', 'AMap.Geolocation','AMap.Autocomplete'], function () {
                         let getlocation = new AMap.Geolocation({
                             timeout:6000,//设置定位超时时间
                             GeolocationFirst:true,//是否使用高精度定位,默认:true
@@ -88,17 +92,58 @@ import MapLoader from '@/assets/AMap/index.js'
                         })
                         map.addControl(new AMap.ToolBar()) //添加工具条插件
                         map.addControl(new AMap.Scale())
+                        // 在图面添加鹰眼控件，在地图右下角显示地图的缩略图
+                        map.addControl(new AMap.OverView({isOpen:true}));
+                    
+                        // 在图面添加类别切换控件，实现默认图层与卫星图、实施交通图层之间切换的控制
+                        map.addControl(new AMap.MapType());
+                    
+                        // 在图面添加定位控件，用来获取和展示用户主机所在的经纬度位置
+                        map.addControl(new AMap.Geolocation());
                         map.addControl(getlocation)//把定位插件加入地图实例
                         getlocation.getCurrentPosition()//获取当前位置
-                        console.log(getlocation.getCurrentPosition())
                     })
+                    AMap.service(["AMap.PlaceSearch"], function () {
+                        placeSearch = new AMap.PlaceSearch({
+                            pageSize: 0, // 单页显示结果条数
+                            pageIndex: 1, // 页码
+                            citylimit: false,  //是否强制限制在设置的城市内搜索
+                            map: map, // 展现结果的地图实例
+                            panel: "panel", // 结果列表将在此容器中进行展示。
+                            autoFitView: true, // 是否自动调整地图视野使绘制的 Marker点都处于视口的可见范围
+                            renderStyle: 'default'
+                        });
+                    });
+                    AMap.event.addListener(placeSearch, "selectChanged", this.selectAddress);
                 })
             },
             onSearch(){
-
+                if(this.value==""){
+                    this.hidePanel = false;
+                    return false;
+                }
+                placeSearch.search(this.value);
+                this.hidePanel =true
+                var autoOptions = {
+                    //city 限定城市，默认全国
+                    city: '深圳'
+                }
+                var autoComplete= new AMap.Autocomplete(autoOptions);
+                autoComplete.search(this.value, function(status, result) {
+                    // 搜索成功时，result即是对应的匹配数据
+                    console.log(result)
+                })
             },
             onCancel(){
 
+            },
+            selectAddress(e) {
+                //这里获得点选地点的经纬度
+                let location = e.selected.data.location;
+                console.log('lng',location.lng);
+                console.log('lat',location.lat);
+                // Do Something
+                this.hidePanel =false
             }
         },
         destroyed() {
@@ -114,6 +159,7 @@ import MapLoader from '@/assets/AMap/index.js'
     #Shop{
         margin-top:27vw;
         width: 100%;
+        height:82%;
         position:fixed;
         padding-bottom: 12vw;
         .Shop_Top{
@@ -126,7 +172,7 @@ import MapLoader from '@/assets/AMap/index.js'
         }
         #Shop_AMap{
             width: 100%;
-            height: 109vw;
+            height: 80%;
             .amap-demo {
                 height: 100%;
             }
@@ -141,12 +187,16 @@ import MapLoader from '@/assets/AMap/index.js'
             border-radius:1vw;
             display:flex;
             align-items: center;
+            border-top-left-radius:5vw;
+            border-bottom-left-radius:5vw;
             .toolbar{
                 width: 100%;
                 height: 100%;
                 display:flex;
                 align-items: center;
                 justify-content: space-around;
+                    border-top-left-radius:5vw;
+                    border-bottom-left-radius:5vw;
                 input{
                     width: 70%;
                     height: 100%;
@@ -154,8 +204,27 @@ import MapLoader from '@/assets/AMap/index.js'
                 /deep/ .van-search{
                     padding: 0;
                     width: 100%;
+                    border-top-left-radius:5vw;
+                    border-bottom-left-radius:5vw;
                 }
             }
         }
+    }
+    #panel {
+        position: absolute;
+        background-color: white;
+        max-height: 50%;
+        overflow-y: auto;
+        top: 44vw;
+        right: 5vw;
+        width: 89vw;
+    }
+    /deep/ .amap-overviewcontrol{
+        width:34vw !important;
+        height:42vw !important;
+    }
+    /deep/ .amap-maptypecontrol{
+        top: 43vw;
+        right: 5vw;
     }
 </style>
