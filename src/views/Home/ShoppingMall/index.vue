@@ -86,6 +86,11 @@ export default {
     BoxHidden(newVal,oldVal){
       console.log(newVal)
     }
+  },
+  method:{
+    goHome(){
+      window.location.href='www.baidu.com'
+    }
   }
 };
 </script>
