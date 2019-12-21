@@ -21,8 +21,8 @@ import "@/assets/font/iconfont.css";
 Vue.use(VueLazyload)
 Vue.use(VueLazyload, {
   preLoad: 1.3,
-  error: '/assets/img/imgLodding.jpg',
-  loading: '/assets/img/imgLodding.jpg',
+  error: '@/assets/img/imgLodding.jpg',
+  loading: '@/assets/img/imgLodding.jpg',
   attempt: 1
 })
 
