@@ -11,7 +11,7 @@
       <div class="Immediately_open">立即打开</div>
     </div>
     <div class="Classify-TopNavBar">
-      <i class="iconfont iconreturn"></i>
+      <i class="iconfont iconreturn" @click="back"></i>
       <span>产品分类</span>
       <i class="iconfont iconmore"></i>
     </div>
@@ -33,16 +33,24 @@
     </div>
     <div class="category">
       <div class="category_left">
-        <div v-for="(item,index) in letfData" :key="index" :style="{background:(index==activeIndex?'#fff':'#eee')}" @click="ActiveClick(index)" ref="ActiveItem">
+        <div v-for="(item,categoryIndex) in letfData" :key="categoryIndex" :style="{background:(categoryIndex==activeIndex?'#fff':'#eee')}" @click="ActiveClick(categoryIndex)" ref="ActiveItem">
           {{item.name}}
         </div>
       </div>
       <div class="category_right">
-        <a href="http://s.lenovo.com.cn/app/?cate=293" class="topImg" >
-          <img src="../../assets/img/zx3.jpg" alt="">
+        <a href="" class="topImg" v-for="(aItem,aIndex) in letfData"  v-show="aIndex == activeIndex" :key="aItem+aIndex">
+          <img v-lazy="ImgItem.image" :src="ImgItem.image" alt="" v-for="(ImgItem,index) in aItem.advertise" :key="index">
         </a>
-        <div v-for="(item,index) in letfData" :key="index" v-show="index == activeIndex">
-          <h3 v-for="(titleItem,titleIndex) in item.children" :key="titleIndex">{{titleItem.name}}</h3>
+        <div v-for="(item,index) in letfData" :key="index" v-show="index == activeIndex" class="nav2Box">
+            <div v-for="(titleItem,titleIndex) in item.children" :key="titleIndex">
+              <h3>{{titleItem.name}}</h3>
+              <div class="nav2Box-Continaer">
+                <div v-for="(continaerItem,continaerIndex) in titleItem.children" :key="continaerIndex">
+                  <img v-lazy="continaerItem.icons" :alt="continaerItem.name">
+                  <span>{{continaerItem.name}}</span>
+                </div>
+              </div>
+            </div>
         </div>
       </div>
     </div>
@@ -63,7 +71,7 @@ export default {
   created() {
     api.getProductList().then(res=>{
       console.log(res)
-      this.letfData = res.nodes
+      this.letfData = res.nodes;
     }).catch(err=>{
       console.log(error)
     })
@@ -73,10 +81,11 @@ export default {
   },
   methods:{
     ActiveClick(index){
-      console.log(index)
       this.activeIndex = index;
-      console.log(this.$refs.ActiveItem)
-    }
+    },
+    back(){
+        this.$router.go(-1);//返回上一层
+    },
   }
 };
 </script>
@@ -179,7 +188,7 @@ export default {
           margin-right: 5px;
         }
       }
-    }
+    } 
   }
   .category{
     width: 100%;
@@ -223,6 +232,40 @@ export default {
         height: 23vw;
         display: flex;
         margin-bottom: 2vw;
+      }
+      .nav2Box{
+        width: 100%;
+        padding-bottom: 31vw;
+        h3{
+          padding: 1vw 3vw;
+          font-size: 3vw;
+          font-family: 'Microsoft YaHei';
+        }
+        .nav2Box-Continaer{
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          div{
+            display: flex;
+            flex-direction: column;
+            width: 21vw;
+            height: 33vw;
+            font-size: 2vw;
+            align-items: center;
+            justify-content: center;
+            margin-left: 2vw;
+            span{
+              color: #999;
+              margin-top: 1.2vw;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              display: -webkit-box;
+              -webkit-line-clamp: 2;
+              -webkit-box-orient: vertical;
+              text-align: center;
+            }
+          }
+        }
       }
     }
   }
