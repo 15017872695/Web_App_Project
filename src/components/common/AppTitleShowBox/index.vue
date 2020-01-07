@@ -13,7 +13,7 @@
       <div class="Immediately_open">立即打开</div>
     </div>
 
-    <div class="HomeAppTitleShowBoxTwo">
+    <div class="HomeAppTitleShowBoxTwo" v-if="selectNavBarBLN">
       <img src="../../../assets/img/navBarLOGO.png" alt="">
       <ul>
         <li v-for="(item,index) in HomeNavBarData" :key="item+index" @click="activeFNC(index,item.path)" >
@@ -32,6 +32,10 @@ export default {
     BoxHidden:{
       type: Boolean,
       default: true
+    },
+    selectNavBarBLN:{
+      type:Boolean,
+      default:true
     }
   },
   data() {

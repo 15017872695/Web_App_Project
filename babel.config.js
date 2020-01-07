@@ -16,7 +16,7 @@ module.exports = {
       'import', 
       {
         libraryName: "vant",
-        libraryDirectory: "es",
+        libraryDirectory: "es", 
         style: true
       },
       'vant'

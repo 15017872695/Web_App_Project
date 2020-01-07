@@ -5,7 +5,7 @@
         <img v-lazy="image" :data-src="image"/>
       </van-swipe-item>
       <div class="custom-indicator" slot="indicator" v-if="hidenIndicator">
-        {{ current + 1 }} / 4
+        {{ current + 1 }} / {{images.length}}
       </div>
     </van-swipe>
   </div>
