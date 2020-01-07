@@ -10,27 +10,29 @@
       </div>
       <div class="Immediately_open">立即打开</div>
     </div>
-    <div class="Classify-TopNavBar">
+    <div class="Classify-TopNavBar"> 
       <i class="iconfont iconreturn" @click="back"></i>
       <span>产品分类</span>
-      <i class="iconfont iconmore"></i>
+      <i class="iconfont iconmore" @click="showMainNav"></i>
     </div>
-    <div class="main-nav" :style="{display:(showNav?'none':'block')}">
-      <ul>
-        <li>
-          <i class="iconfont iconshouye"></i>
-          <span>首页</span>
-        </li>
-        <li>
-          <i class="iconfont iconsousuo"></i>
-          <span>搜索</span>
-        </li>
-        <li>
-          <i class="iconfont iconwode1"></i>
-          <span>个人中心</span>
-        </li>
-      </ul>
-    </div>
+    <transition name="fade">
+      <div class="main-nav" v-show="showNav">
+        <ul>
+          <li @click="goHome">
+            <i class="iconfont iconshouye"></i>
+            <span>首页</span>
+          </li>
+          <li>
+            <i class="iconfont iconsousuo"></i>
+            <span>搜索</span>
+          </li>
+          <li>
+            <i class="iconfont iconwode1"></i>
+            <span>个人中心</span>
+          </li>
+        </ul>
+      </div>
+    </transition>
     <div class="category">
       <div class="category_left">
         <div v-for="(item,categoryIndex) in letfData" :key="categoryIndex" :style="{background:(categoryIndex==activeIndex?'#fff':'#eee')}" @click="ActiveClick(categoryIndex)" ref="ActiveItem">
@@ -65,10 +67,11 @@ export default {
     return {
       letfData:[],
       activeIndex:0,
-      showNav:true,
+      showNav:false,
     };
   },
   created() {
+    // 发送请求获取数据
     api.getProductList().then(res=>{
       console.log(res)
       this.letfData = res.nodes;
@@ -84,13 +87,27 @@ export default {
       this.activeIndex = index;
     },
     back(){
-        this.$router.go(-1);//返回上一层
+      this.$router.go(-1);//返回上一层
     },
+    showMainNav(){
+      this.showNav = !this.showNav;
+    },
+    goHome(){
+      this.$router.push('/ShoppingMall')
+    }
   }
 };
 </script>
 
 <style scoped lang="scss">
+/* 可以设置不同的进入和离开动画 */
+/* 设置持续时间和动画函数 */
+.fade-enter-active, .fade-leave-active {
+    transition: opacity 0.5s
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active, 2.1.8 版本以下 */ {
+    opacity: 0
+}
 #Classify {
   width: 100%;
   height: 100%;
@@ -160,6 +177,9 @@ export default {
     font-size:4.5vw;
     .iconfont{
       font-size:6.5vw;
+    }
+    .iconmore{
+        font-size:8vw;
     }
   }
   .main-nav{

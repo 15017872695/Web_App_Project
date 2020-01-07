@@ -4,7 +4,7 @@
     <Search :searchVal="value" :BoxHidden="BoxHidden"></Search>
 
     <!-- 轮播图模块 -->
-    <Swiper :BoxHidden="BoxHidden"></Swiper>
+    <Swiper :BoxHidden="BoxHidden" :images="images"></Swiper>
 
     <!-- 导航栏模块 -->
     <ul class="ShoppingMall_NavBar">
@@ -76,7 +76,16 @@ export default {
         { name: "选件", imgUrl: require("@/assets/img/navBar8.png") },
         { name: "服务", imgUrl: require("@/assets/img/navBar9.png") },
         { name: "更多", imgUrl: require("@/assets/img/navBar10.png") }
-      ]
+      ],
+      images: [
+        "https://p1.lefile.cn/fes/cms/2019/12/01/93jp46gzfodhifqra4yblzqqhk2hbo180225.jpg",
+        "https://p3.lefile.cn/fes/cms/2019/11/15/xoov2hqt5jzy9hrsvo07ml6dgfic8q663743.jpg",
+        "https://p1.lefile.cn/fes/cms/2019/10/29/jifbmsq7o96grekg1kkq1m1vslghy4701210.jpg",
+        "https://p2.lefile.cn/fes/cms/2019/12/02/p63jvh7n4m7f79m8gzra7lb2wh1jyf072838.jpg",
+        "https://p1.lefile.cn/fes/cms/2019/12/02/uf2xxpbz0zcp9ff9tnhzxle1x59xyk624611.jpg",
+        "https://p1.lefile.cn/fes/cms/2019/11/11/37h1fq66nxg6hkctcxk7m0whtlgimv959851.jpg",
+        "https://p1.lefile.cn/fes/cms/2019/11/11/l7on1dyneuuy942czo8fxpp2ko9is0458709.jpg"
+      ],
     };
   },
   components: {
@@ -100,6 +109,8 @@ export default {
   display: flex;
   flex-direction: column;
   padding-bottom: 12vw;
+  position: relative;
+  top: 0;
   .ShoppingMall_NavBar {
     width: 100%;
     height: auto;

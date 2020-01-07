@@ -21,7 +21,7 @@
     </div>
     <div class="Seckill-Continer">
       <ul>
-        <li>
+        <li @click="goDetails">
           <div>
             <img src="@/assets/img/sekillImg1.jpg" alt />
           </div>
@@ -68,8 +68,8 @@ export default {
         this.countTime()
     },
     methods:{
-        // 倒计时
-        countTime () {
+      // 倒计时
+      countTime () {
         // 获取当前时间
         let date = new Date()
         let now = date.getTime()
@@ -99,12 +99,17 @@ export default {
         }
         // 等于0的时候不调用
         if (Number(this.hour) === 0 && Number(this.day) === 0 && Number(this.min) === 0 && Number(this.second) === 0) {
-                return
-            } else {
-            // 递归每秒调用countTime方法，显示动态时间效果,
-                setTimeout(this.countTime, 1000)
-            }
+            return
+        } else {
+        // 递归每秒调用countTime方法，显示动态时间效果,
+            setTimeout(this.countTime, 1000)
         }
+      },
+
+      // 跳转至详情
+      goDetails(){
+        this.$router.push('/ProductDetails')
+      }
     }
 }
 </script>
