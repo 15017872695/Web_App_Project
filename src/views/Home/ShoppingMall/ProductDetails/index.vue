@@ -56,9 +56,8 @@
       <div class="ProductMS_right">
         <span>距结束还剩:</span>
         <div class="time">
-          <em>{{day }}</em>
-          <i>:</i>
-          <em>{{hour}}</em>
+          <span style="margin-right:1vw;">{{day }}天 </span>
+          <em> {{hour}}</em>
           <i>:</i>
           <em>{{min}}</em>
           <i>:</i>
@@ -66,15 +65,66 @@
         </div>
       </div>
     </div>
+    <div class="Product_Info">
+      <div>ThinkPad T490 英特尔酷睿i5 笔记本电脑 20N2A002CD</div>
+      <div>八代英特尔酷睿i5-8265U/Windows 10家庭中文版/8GB/512GB SSD/WQHD/独显/14.0英寸</div>
+    </div>
+    <div class="Product_YH">
+      <div>
+        <span>活动</span>
+        <div class="Product_YH_Center">
+          <p>【限时赠好礼】下单赠“女排拼搏2020“主题台历，数量有限，赠完即止，仅限电子发票用户！</p>
+          <p>【福利】天天抽1000元花呗红包（联想APP支付才可以哦），详情点击了解</p>
+        </div>
+        <img src="https://p3.lefile.cn/product/adminweb/2018/11/28/3ed4e508-b698-475e-b2a4-2e4545a8daa0.png" alt="">
+      </div>
+      <div>
+        <span>赠送</span>
+        <div class="Product_YH_Center">
+          <span>ThinkPad双肩包B200</span>
+        </div>
+        <img src="https://p3.lefile.cn/product/adminweb/2018/11/28/3ed4e508-b698-475e-b2a4-2e4545a8daa0.png" alt="">
+      </div>
+      <div>
+        <span>分期</span>
+        <div class="Product_YH_Center">
+          <span>花呗分期 / 招行分期</span>
+        </div>
+        <img src="https://p3.lefile.cn/product/adminweb/2018/11/28/3ed4e508-b698-475e-b2a4-2e4545a8daa0.png" alt="">
+      </div>
+      <div>
+        <span>已选</span>
+        <div class="Product_YH_Center">
+          <span><b>未选官方服务</b> i5-8265U/Windows 10家庭中文版/8GB/512GB SSD/WQHD/独显/14.0英寸</span>
+        </div>
+        <img src="https://p3.lefile.cn/product/adminweb/2018/11/28/3ed4e508-b698-475e-b2a4-2e4545a8daa0.png" alt="">
+      </div>
+    </div>
+
+    <!-- Vant商品详情快捷导航组件 -->
+    <van-goods-action safe-area-inset-bottom>
+      <van-goods-action-icon icon="chat-o" text="客服" />
+      <van-goods-action-icon icon="cart-o" text="购物车" info="5" />
+      <van-goods-action-icon icon="shop-o" text="店铺" info="12" />
+      <van-goods-action-button type="warning" text="加入购物车" />
+      <van-goods-action-button type="danger" text="立即购买" />
+    </van-goods-action>
   </div>
 </template>
 <script>
 import Swiper from "@/components/common/Swiper";
 import AppTitleShowBox from "@/components/common/AppTitleShowBox";
+import { GoodsAction, GoodsActionIcon, GoodsActionButton } from "vant";
 export default {
   name: "ProductDetails",
   props: {},
-  components: { Swiper, AppTitleShowBox },
+  components: {
+    Swiper,
+    AppTitleShowBox,
+    [GoodsAction.name]: GoodsAction,
+    [GoodsActionIcon.name]: GoodsActionIcon,
+    [GoodsActionButton.name]: GoodsActionButton
+  },
   data() {
     return {
       BoxHidden: false,
@@ -90,21 +140,21 @@ export default {
         "https://p1.lefile.cn/product/adminweb/2019/04/28/YweeNTy7caTAm00BS0CKeQDS3-3441.jpg",
         "https://p3.lefile.cn/product/adminweb/2019/04/28/QAZ2e64r7kPG6LXHNeBjju0qh-5501.jpg"
       ],
-      TopOne: true,
-      TopTwo: false,
+      TopOne: false,
+      TopTwo: true,
       showNav: false,
       selectInfo: ["商品", "详情", "配置", "评价"],
       Index: 0,
-      curStartTime: '2020-1-17',
-      hour: '00',
-      min: '00',
-      second: '00',
-      day:'00'
+      curStartTime: "2020-1-17",
+      hour: "00",
+      min: "00",
+      second: "00",
+      day: "00"
     };
   },
   created() {},
   mounted() {
-    this.countTime()
+    this.countTime();
   },
   methods: {
     back() {
@@ -177,7 +227,9 @@ export default {
 }
 #ProductDetails {
   width: 100%;
-  height: 100%;
+  height: auto;
+  background: #eee;
+  padding-bottom: 13vw;
   #Swiper {
     height: 103vw;
     margin-top: 0 !important;
@@ -319,6 +371,8 @@ export default {
     }
     .noPrice {
       font-size: 3vw;
+      text-decoration: line-through;
+      margin-left: 1vw;
     }
     .sg-notice {
       width: 18vw;
@@ -362,19 +416,72 @@ export default {
     > span {
       transform: scale(0.8);
     }
-    .time{
+    .time {
       width: 100%;
       display: flex;
       justify-content: center;
-      em{
+      em {
         color: #fff;
-        background: #F4364C;
+        background: #f4364c;
         width: 5vw;
         display: flex;
         justify-content: center;
       }
-      i{
+      i {
         font-weight: bold;
+      }
+    }
+  }
+  .Product_Info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 2vw;
+    box-sizing: border-box;
+    background: #fff;
+    > div:nth-child(1) {
+      font-size: 4.5vw;
+      font-weight: bold;
+    }
+    > div:nth-child(2) {
+      font-size: 2vw;
+      color: #4a4a4a;
+      margin-top: 2vw;
+    }
+  }
+  .Product_YH {
+    width: 100%;
+    height: auto;
+    margin-top: 2vw;
+    background: #fff;
+    padding: 3vw;
+    box-sizing: border-box;
+    >div{
+      display: flex;
+      width: 100%;
+      height: auto;
+      border-bottom:1px solid #eee;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 3.5vw;
+      padding: 3vw 0;
+      .Product_YH_Center{
+        width: 75vw;
+        
+      }
+      img{
+        width: 7vw;
+        height: 7vw;
+      }
+      p{
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -o-text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        word-break: break-all;
+        color: #F4364C;
       }
     }
   }
