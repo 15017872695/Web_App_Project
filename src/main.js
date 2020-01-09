@@ -15,11 +15,10 @@ import VueLazyload from 'vue-lazyload';
 // 小图标
 import "@/assets/font/iconfont.css";
 
-Vue.use(VueLazyload)
 Vue.use(VueLazyload, {
   preLoad: 1.3,
-  error: './assets/img/imgLodding.jpg',
-  loading: './assets/img/imgLodding.jpg',
+  error: '',
+  loading: require('./assets/img/imgLodding.jpg'),
   attempt: 1
 })
 

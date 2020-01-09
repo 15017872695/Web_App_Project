@@ -4,8 +4,8 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 // 引入
-const Home = () => import(/* webpackChunkName: "Home" */ '@/views/Home');
-/*>>>*/  const ShoppingMall = () => import(/* webpackChunkName: "ShoppingMall" */ '@/views/Home/ShoppingMall');
+const Home = () => import(/* webpackPrefetch:true */ '@/views/Home');
+/*>>>*/  const ShoppingMall = () => import(/* webpackPrefetch: true */ '@/views/Home/ShoppingMall');
          /*>>>*/  const ProductDetails = () => import(/* webpackChunkName: "ProductDetails" */ '@/views/Home/ShoppingMall/ProductDetails');
          
          const Community = () => import(/* webpackChunkName: "Community" */ '@/views/Home/Community');

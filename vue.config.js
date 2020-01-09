@@ -38,9 +38,15 @@ module.exports = {
     lintOnSave: true, // 是否开启编译时是否不符合eslint提示
     // js,css代码的最小化压缩和分割
     chainWebpack: config => {
-        config.optimization.minimize(true);//压缩
-        config.optimization.splitChunks({//分割
+        // 因为 vuecli 3默认开启 prefetch(预先加载模块)，提前获取用户未来可能会访问的内容在首屏会把这十几个路由文件，都一口气下载了所以我们要关闭这个功能，在 vue.config.js中设置
+        config.plugins.delete('prefetch')
+        
+        //压缩
+        config.optimization.minimize(true);
+        //分割
+        config.optimization.splitChunks({
             chunks: 'all'
-        })
+        });
+        
     },
 }
