@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale= 1.0, minimum-scale=1.0">
-    <link rel="icon" href="<%= BASE_URL %>favicon.ico">
-    <title>VueCLI3移动端开发环境配置标准版</title>
-    <style>
-      html,body{
-        width: 100%;
-        height: auto;
-      }
-    </style>
-  </head>
-  <body>
-    <noscript>
-      <strong>We're sorry but web_app_project doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
-    </noscript>
-    <div id="app"></div>
-  </body>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale= 1.0, minimum-scale=1.0, viewport-fit=cover">
+  <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+  <title>VueCLI3移动端开发环境配置标准版</title>
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+
+<body>
+  <noscript>
+    <strong>We're sorry but web_app_project doesn't work properly without JavaScript enabled. Please enable it to
+      continue.</strong>
+  </noscript>
+  <div id="app"></div>
+</body>
+
 </html>
 
 <!--  viewport-units-buggyfill postcss-px-to-viewport和postcss-viewport-units两个PostCSS插件和Viewport Units Buggyfill让我完美的解决了vw兼容问题 -->
-<script src="//g.alicdn.com/fdilab/lib3rd/viewport-units-buggyfill/0.6.2/??viewport-units-buggyfill.hacks.min.js,viewport-units-buggyfill.min.js"></script>
+<script
+  src="//g.alicdn.com/fdilab/lib3rd/viewport-units-buggyfill/0.6.2/??viewport-units-buggyfill.hacks.min.js,viewport-units-buggyfill.min.js"></script>
 <script> window.onload = function () { window.viewportUnitsBuggyfill.init({ hacks: window.viewportUnitsBuggyfillHacks }); } </script>
