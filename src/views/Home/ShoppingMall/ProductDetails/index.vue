@@ -56,8 +56,7 @@
       <div class="ProductMS_right">
         <span>距结束还剩:</span>
         <div class="time">
-          <em>{{day }}</em>
-          <i>:</i>
+          <span>{{day }}天 </span>
           <em>{{hour}}</em>
           <i>:</i>
           <em>{{min}}</em>
@@ -65,6 +64,9 @@
           <em>{{second}}</em>
         </div>
       </div>
+    </div>
+    <div class="ProductInfo">
+
     </div>
   </div>
 </template>
@@ -377,6 +379,10 @@ export default {
         font-weight: bold;
       }
     }
+  }
+  .ProductInfo{
+    width:100%;
+    
   }
 }
 </style>
