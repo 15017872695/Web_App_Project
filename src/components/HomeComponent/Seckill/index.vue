@@ -174,6 +174,8 @@ export default {
   .Seckill-Continer {
     width: 100%;
     overflow: hidden;
+    padding: 0 3vw;
+    box-sizing: border-box;
     ul {
       width: 100%;
       height: auto;

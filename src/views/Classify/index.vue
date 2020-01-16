@@ -43,7 +43,7 @@
         <a href="" class="topImg" v-for="(aItem,aIndex) in letfData"  v-show="aIndex == activeIndex" :key="aItem+aIndex">
           <img v-lazy="ImgItem.image" :src="ImgItem.image" alt="" v-for="(ImgItem,index) in aItem.advertise" :key="index">
         </a>
-        <div v-for="(item,index) in letfData" :key="index" v-show="index == activeIndex" class="nav2Box">
+        <div v-for="(item,index) in letfData" :key="index" v-show="index == activeIndex" class="nav2Box" @click="goDetails">
             <div v-for="(titleItem,titleIndex) in item.children" :key="titleIndex">
               <h3>{{titleItem.name}}</h3>
               <div class="nav2Box-Continaer">
@@ -80,7 +80,7 @@ export default {
     })
   },
   mounted () {
-
+    
   },
   methods:{
     ActiveClick(index){
@@ -94,6 +94,10 @@ export default {
     },
     goHome(){
       this.$router.push('/ShoppingMall')
+    },
+    // 跳转至详情
+    goDetails(){
+      this.$router.push('/ProductDetails')
     }
   }
 };
@@ -113,6 +117,8 @@ export default {
   height: 100%;
   position: fixed;
   top: 0;
+  overflow: hidden;
+
   .HomeAppTitleShowBox {
     width: 100%;
     height: 15vw;
@@ -247,6 +253,7 @@ export default {
       overflow-y: auto;
       padding: 2vw;
       box-sizing: border-box;
+      overflow-x: hidden;
       .topImg{
         width: 100%;
         height: 23vw;

@@ -86,13 +86,13 @@ export default {
     flex-direction: column;
     .Classify-TopNavBar{
       width: 100%;
-      height:12vw;
+      height:auto;
       background:#E8E8E8;
       border-bottom: 1px solid silver;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding:20px;
+      padding: 1vw 5vw;
       box-sizing: border-box;
       font-size:4.5vw;
       .iconfont{
@@ -123,7 +123,7 @@ export default {
           border-radius: 2vw;
           background:#e0524b;
           color: #fff;
-          font-size: 2vw;
+          font-size: 3.5vw;
           margin: 5vw 0;
         }
       }

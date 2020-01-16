@@ -1,7 +1,7 @@
 <template>
   <div id="Swiper" :style="{marginTop:BoxHidden?'39.5vw':'0'}">
     <van-swipe :autoplay="3000" indicator-color="white" lazyComponent="true" @change="onChange">
-      <van-swipe-item v-for="(image, index) in imagesData" :key="index" v-lazy-container = "{selector:'img',error:'xxx.jpg',loading:'imgLodding.jpg'} ">
+      <van-swipe-item v-for="(image, index) in imagesData" :key="index" v-lazy-container = "{selector:'img',error:'@/assets/logo.png',loading:'@/assets/img/imgLodding.jpg'}" @click="Preview(index)">
         <img v-lazy="image" :data-src="image"/>
       </van-swipe-item>
       <div class="custom-indicator" slot="indicator" v-if="hidenIndicator">
@@ -11,10 +11,10 @@
   </div>
 </template>
 <script>
-import { Swipe, SwipeItem } from "vant";
+import { Swipe, SwipeItem,ImagePreview} from "vant";
 export default {
   name: "Swiper",
-  components: { [Swipe.name]: Swipe, [SwipeItem.name]: SwipeItem},
+  components: { [Swipe.name]: Swipe, [SwipeItem.name]: SwipeItem,[ImagePreview.name]:ImagePreview},
   props:{
     BoxHidden:{
       type: Boolean,
@@ -41,6 +41,17 @@ export default {
   methods:{
     onChange(index) {
       this.current = index;
+    },
+    Preview(index){
+      console.log(index)
+      // 调用Vant图片预览回调函数
+      ImagePreview({
+        images: this.imagesData,
+        startPosition: index,
+        onClose() {
+          // do something
+        }
+      });
     }
   }
 };

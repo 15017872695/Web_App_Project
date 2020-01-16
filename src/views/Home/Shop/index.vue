@@ -38,7 +38,8 @@ export default {
         lat: ""
       },
       value: "",
-      hidePanel: false
+      hidePanel: false,
+      rectangle:''
     };
   },
   components: { [Search.name]: Search, [Dialog.Component.name]: Dialog.Component },
@@ -48,25 +49,24 @@ export default {
   methods: {
     // 获取周围信息
     req_post() {
+      console.log(this.rectangle)
       const that = this;
-      const registerUrl =
-        "http://restapi.amap.com/v3/batch?key=7168593a2164a8afa9599b39d46ba18d";
+      const registerUrl = "http://restapi.amap.com/v3/batch?key=7168593a2164a8afa9599b39d46ba18d";
+      // types参数意义：070000理发店，080000网吧
       const newUserInfo = {
-        ops: [
-          {
-            url:
-              "/v3/place/around?offset=10&page=1&key=7168593a2164a8afa9599b39d46ba18d&location=" +
-              that.lng +
-              "," +
-              that.lat +
-              "&output=json&radius=100000&types=080000"
-          }
+        "ops": [
+            {
+                "url": `/v3/place/around?offset=10&page=1&key=7168593a2164a8afa9599b39d46ba18d&location=${that.rectangle}&output=json&radius=100000&types=070000`
+            },
+            {
+                "url": `/v3/place/around?offset=10&page=1&key=7168593a2164a8afa9599b39d46ba18d&location=${that.rectangle}&output=json&radius=100000&types=070000`
+            }
         ]
       };
       axios
         .post(registerUrl, newUserInfo, {
           headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
+            "Content-Type": "application/json"
           },
           method: "POST"
         })
@@ -102,11 +102,17 @@ export default {
           ],
           function() {
             let getlocation = new AMap.Geolocation({
+              enableHighAccuracy: true,//是否使用高精度定位，默认:true
+              maximumAge: 0,           //定位结果缓存0毫秒，默认：0
+              convert: true,           //自动偏移坐标，偏移后的坐标为高德坐标，默认：true
               timeout: 6000, //设置定位超时时间
               GeolocationFirst: true, //是否使用高精度定位,默认:true
               maximumAge: 0, //定位结果缓存0毫秒，默认:0
               zoomToAccuracy: true, //定位成功后是否自动调整地图视野到定位点
               buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+              showMarker: true,        //定位成功后在定位到的位置显示点标记，默认：true
+              showCircle: true,        //定位成功后用圆圈表示定位精度范围，默认：true
+              panToLocation: true,     //定位成功后将定位到的位置作为地图中心点，默认：true
             });
             map.addControl(new AMap.ToolBar()); //添加工具条插件
             map.addControl(new AMap.Scale());
@@ -120,6 +126,7 @@ export default {
             // map.addControl(new AMap.Geolocation());
             map.addControl(getlocation); //把定位插件加入地图实例
             getlocation.getCurrentPosition();
+            
 
             // 直接获取当前位置信息↓
             var citySearch = new AMap.CitySearch();
@@ -127,12 +134,16 @@ export default {
                 if (status === "complete" && result.info === "OK") {
                     // 查询成功，result即为当前所在城市信息
                     console.log(result)
+                    that.rectangle = result.rectangle.split(';')[1];
+
                     Dialog.alert({
-                        title: '当前位置',
+                        title: '当前位置', 
                         message: result.province+'-'+result.city
                     }).then(() => {
                     // on close
                     });
+
+                    that.req_post();
                 }
             });
           }
@@ -251,17 +262,24 @@ export default {
       display: flex;
       align-items: center;
       justify-content: space-around;
-      border-top-left-radius: 5vw;
-      border-bottom-left-radius: 5vw;
+      border-radius: 5vw;
       input {
         width: 70%;
         height: 100%;
       }
+      /deep/ .van-search__content--round{
+        border-radius: 0;
+        border-top-left-radius: 5vw;
+        border-bottom-left-radius: 5vw;
+      }
       /deep/ .van-search {
         padding: 0;
         width: 100%;
-        border-top-left-radius: 5vw;
-        border-bottom-left-radius: 5vw;
+        border-radius: 5vw;
+        padding-left: 0.5vw;
+      }
+      /deep/ .van-search__action{
+        color:rgb(44, 186, 230);
       }
     }
   }
@@ -277,11 +295,14 @@ export default {
 }
 /deep/ .amap-overviewcontrol {
   width: 34vw !important;
-  height: 42vw !important;
+  height: 35vw !important;
+  bottom: 8vw !important;
 }
 /deep/ .amap-maptypecontrol {
   top: 43vw;
   right: 5vw;
+}
+/deep/ .amap-overview-map {
 }
 /deep/ .amap-geolocation-con {
   bottom: 10vw !important;

@@ -104,7 +104,7 @@
     <!-- Vant商品详情快捷导航组件 -->
     <van-goods-action safe-area-inset-bottom>
       <van-goods-action-icon icon="chat-o" text="客服" />
-      <van-goods-action-icon icon="cart-o" text="购物车" info="5" />
+      <van-goods-action-icon icon="cart-o" text="购物车" info="0" url="/ShoppingCath"/>
       <van-goods-action-icon icon="shop-o" text="店铺" info="12" />
       <van-goods-action-button type="warning" text="加入购物车" />
       <van-goods-action-button type="danger" text="立即购买" />
@@ -114,7 +114,7 @@
 <script>
 import Swiper from "@/components/common/Swiper";
 import AppTitleShowBox from "@/components/common/AppTitleShowBox";
-import { GoodsAction, GoodsActionIcon, GoodsActionButton } from "vant";
+import { GoodsAction, GoodsActionIcon, GoodsActionButton} from "vant";
 export default {
   name: "ProductDetails",
   props: {},
@@ -123,7 +123,7 @@ export default {
     AppTitleShowBox,
     [GoodsAction.name]: GoodsAction,
     [GoodsActionIcon.name]: GoodsActionIcon,
-    [GoodsActionButton.name]: GoodsActionButton
+    [GoodsActionButton.name]: GoodsActionButton,
   },
   data() {
     return {
