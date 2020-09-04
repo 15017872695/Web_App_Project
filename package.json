@@ -48,7 +48,7 @@
     "babel-plugin-component": "^1.1.1",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.13.1",
     "postcss-loader": "^3.0.0",
     "postcss-px2rem": "^0.3.0",
     "sass-loader": "^7.1.0",
