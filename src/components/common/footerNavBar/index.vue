@@ -3,57 +3,74 @@
   <div id="footerNavBar">
     <ul>
       <li
-        v-for="(item,index) in NavBarData"
-        :key="item+index"
-        :style="index==0 ? 'color:#F93722;' : ''"
-        @click="goRoute(index,item.path)"
+        v-for="(item, index) in NavBarData"
+        :key="item + index"
+        :style="index == 0 ? 'color:#F93722;' : ''"
+        @click="goRoute(index, item.path)"
       >
         <i :class="item.icon"></i>
-        <span>{{item.title}}</span>
+        <span>{{ item.title }}</span>
       </li>
     </ul>
   </div>
 </template>
 
 <script>
-import eventBus from '../../../utils/eventBus.js'
+import eventBus from "../../../utils/eventBus.js";
 export default {
   name: "footerNavBar",
-  props:{
-    footerPathProps:{
+  props: {
+    footerPathProps: {
       type: String,
-      default: "/ShoppingMall"
-    }
+      default: "/ShoppingMall",
+    },
   },
   data() {
     return {
       NavBarData: [
-        { name: "Home",path: "/ShoppingMall",title: "首页",icon: "iconfont iconshouye"},{name: "Classify",path: "/Classify",title: "分类",icon: "iconfont iconfen_lei"},
-        { name: "ShoppingCath",path: "/ShoppingCath",title: "购物车",icon: "iconfont icongouwuche"},
-        { name: "My", path: "/My", title: "我的", icon: "iconfont iconwode1" }
+        {
+          name: "Home",
+          path: "/ShoppingMall",
+          title: "首页",
+          icon: "iconfont iconshouye",
+        },
+        {
+          name: "Classify",
+          path: "/Classify",
+          title: "分类",
+          icon: "iconfont iconfen_lei",
+        },
+        {
+          name: "ShoppingCath",
+          path: "/ShoppingCath",
+          title: "购物车",
+          icon: "iconfont icongouwuche",
+        },
+        { name: "My", path: "/My", title: "我的", icon: "iconfont iconwode1" },
       ],
       activeIndex: 0,
     };
   },
   created() {
-    console.log(this.footerPathProps)
+    console.log(this.footerPathProps);
   },
   methods: {
     goRoute(index, newPath) {
       this.activeIndex = index;
-      eventBus.$emit('my-event',newPath)
-      this.$router.push({ path: newPath }); 
+      eventBus.$emit("my-event", newPath);
+      this.$router.push({ path: newPath });
     },
-  }, 
-  watch:{
-    footerPathProps(newVal,oldVal) {//使用watch监听属性，监听父组件传递过来的值。newVal新值,oldVal旧值
-      for(let i in this.NavBarData){
-        if(this.NavBarData[i].path==newVal){
+  },
+  watch: {
+    footerPathProps(newVal, oldVal) {
+      //使用watch监听属性，监听父组件传递过来的值。newVal新值,oldVal旧值
+      for (let i in this.NavBarData) {
+        if (this.NavBarData[i].path == newVal) {
           this.activeIndex = i;
         }
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -80,8 +97,8 @@ export default {
       align-items: center;
       justify-content: center;
       flex-direction: column;
-      i{
-        font-size:4.5vw;
+      i {
+        font-size: 4.5vw;
       }
     }
   }
